@@ -1,42 +1,20 @@
 import { useEffect, useState } from 'react';
 
-const Tooth = ({ title, changeCavities, teeth, position, tooth }) => {
-  const [regiones, setRegiones] = useState({
-    region1: false,
-    region2: false,
-    region3: false,
-    region4: false,
-    region5: false,
-  });
+const Tooth = ({ changeCavities, position, tooth }) => {
+  const ObjectCaries = tooth[Object.keys(tooth)[0]];
 
-  console.log(Object.keys(tooth)[0]);
-
-  // const [region1, setRegion1] = useState(false);
-  // const [region2, setRegion2] = useState(false);
-  // const [region3, setRegion3] = useState(false);
-  // const [region4, setRegion4] = useState(false);
-  // const [region5, setRegion5] = useState(false);
+  const [regiones, setRegiones] = useState(ObjectCaries['Caries']);
+  const [tipoDiente] = useState(Object.keys(tooth)[0]);
 
   useEffect(() => {
-    // const data = teeth[position];
-    // const newState = data.map((tooth) => {
-    //   if (Object.keys(tooth)[0] === title) {
-    //     tooth[title]['Caries'] = {
-    //       1: regiones['region1'],
-    //       2: regiones['region2'],
-    //       3: regiones['region3'],
-    //       4: regiones['region4'],
-    //       5: regiones['region5'],
-    //     };
-    //   }
-    //   return tooth;
-    // });
-    // changeCavities({ ...teeth, position: newState });
-  }, [regiones, changeCavities]);
+    const newState = {};
+    newState[tipoDiente] = { Caries: { ...regiones } };
+    changeCavities(position, newState);
+  }, [regiones]);
 
   return (
     <div style={{ width: '320px', padding: '4px' }}>
-      <h5 className="text-center">{Object.keys(tooth)[0]}</h5>
+      <h5 className="text-center">{tipoDiente}</h5>
       <div className=" d-flex justify-content-between align-items-center">
         <div className="">
           <div
@@ -45,35 +23,35 @@ const Tooth = ({ title, changeCavities, teeth, position, tooth }) => {
           >
             <div
               className={
-                regiones['region1']
+                regiones['1']
                   ? 'region border border-dark bg-primary'
                   : ' region border border-dark bg-white'
               }
             ></div>
             <div
               className={
-                regiones['region2']
+                regiones['2']
                   ? 'region border border-dark bg-secondary'
                   : ' region border border-dark bg-white'
               }
             ></div>
             <div
               className={
-                regiones['region3']
+                regiones['3']
                   ? 'region border border-dark bg-success'
                   : ' region border border-dark bg-white'
               }
             ></div>
             <div
               className={
-                regiones['region4']
+                regiones['4']
                   ? 'region border border-dark bg-info'
                   : ' region border border-dark bg-white'
               }
             ></div>
             <div
               className={
-                regiones['region5']
+                regiones['5']
                   ? 'region_central rounded-circle bg-warning border-dark'
                   : 'region_central rounded-circle border border-dark bg-white'
               }
@@ -86,9 +64,9 @@ const Tooth = ({ title, changeCavities, teeth, position, tooth }) => {
               className="form-check-input"
               type="checkbox"
               role="switch"
-              checked={regiones['region1']}
+              checked={regiones['1']}
               onChange={({ target }) =>
-                setRegiones({ ...regiones, region1: target.checked })
+                setRegiones({ ...regiones, 1: target.checked })
               }
               id="flexSwitchCheckChecked"
             />
@@ -99,9 +77,9 @@ const Tooth = ({ title, changeCavities, teeth, position, tooth }) => {
               className="form-check-input"
               type="checkbox"
               role="switch"
-              checked={regiones['region2']}
+              checked={regiones['2']}
               onChange={({ target }) =>
-                setRegiones({ ...regiones, region2: target.checked })
+                setRegiones({ ...regiones, 2: target.checked })
               }
               id="flexSwitchCheckChecked"
             />
@@ -112,9 +90,9 @@ const Tooth = ({ title, changeCavities, teeth, position, tooth }) => {
               className="form-check-input"
               type="checkbox"
               role="switch"
-              checked={regiones['region3']}
+              checked={regiones['3']}
               onChange={({ target }) =>
-                setRegiones({ ...regiones, region3: target.checked })
+                setRegiones({ ...regiones, 3: target.checked })
               }
               id="flexSwitchCheckChecked"
             />
@@ -125,9 +103,9 @@ const Tooth = ({ title, changeCavities, teeth, position, tooth }) => {
               className="form-check-input"
               type="checkbox"
               role="switch"
-              checked={regiones['region4']}
+              checked={regiones['4']}
               onChange={({ target }) =>
-                setRegiones({ ...regiones, region4: target.checked })
+                setRegiones({ ...regiones, 4: target.checked })
               }
               id="flexSwitchCheckChecked"
             />
@@ -138,9 +116,9 @@ const Tooth = ({ title, changeCavities, teeth, position, tooth }) => {
               className="form-check-input"
               type="checkbox"
               role="switch"
-              checked={regiones['region5']}
+              checked={regiones['5']}
               onChange={({ target }) =>
-                setRegiones({ ...regiones, region5: target.checked })
+                setRegiones({ ...regiones, 5: target.checked })
               }
               id="flexSwitchCheckChecked"
             />

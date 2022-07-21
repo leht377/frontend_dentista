@@ -8,18 +8,32 @@ const FormInfoPaciente = () => {
   const [teeth, setTeeth] = useState(dataTeeth);
   const [msg, setMsg] = useState(null);
 
-  const changeCavities = useCallback((newTeenth) => {
-    setTeeth(newTeenth);
-  }, []);
+  const changeCavities = useCallback(
+    (position, newStateTooth) => {
+      const updateState = teeth[position].map((tooth) => {
+        if (Object.keys(tooth)[0] === Object.keys(newStateTooth)[0]) {
+          return newStateTooth;
+        }
+        return tooth;
+      });
+      const newStatePosition = { ...teeth };
+      newStatePosition[position] = updateState;
+      setTeeth(newStatePosition);
+    },
+    [teeth]
+  );
 
   const handleFormPaciente = (event) => {
     event.preventDefault();
     setMsg('Paciente registrado satisfactoriamente');
     setTimeout(() => {
       setMsg(null);
-      setTeeth(dataTeeth);
     }, 2000);
   };
+
+  useEffect(() => {
+    console.log('se renderiza');
+  }, [msg]);
 
   return (
     <form onSubmit={handleFormPaciente} className="row p-2">
@@ -63,9 +77,8 @@ const FormInfoPaciente = () => {
             <div className="accordion-body d-flex flex-wrap gap-3">
               {teeth.Derecha_sup.map((tooth) => (
                 <Tooth
-                  key={Object.keys(tooth)[0]}
+                  key={'DerSup' + Object.keys(tooth)[0]}
                   changeCavities={changeCavities}
-                  teeth={teeth}
                   tooth={tooth}
                   position={'Derecha_sup'}
                 />
@@ -96,10 +109,9 @@ const FormInfoPaciente = () => {
             <div className="accordion-body d-flex flex-wrap gap-3">
               {teeth.Izquierda_sup.map((tooth) => (
                 <Tooth
-                  key={Object.keys(tooth)[0]}
+                  key={'IzqSup' + Object.keys(tooth)[0]}
                   title={Object.keys(tooth)[0]}
                   changeCavities={changeCavities}
-                  teeth={teeth}
                   tooth={tooth}
                   position={'Izquierda_sup'}
                 />
@@ -130,9 +142,8 @@ const FormInfoPaciente = () => {
             <div className="accordion-body d-flex flex-wrap gap-3">
               {teeth.Derecha_inf.map((tooth) => (
                 <Tooth
-                  key={Object.keys(tooth)[0]}
+                  key={'DerInf' + Object.keys(tooth)[0]}
                   changeCavities={changeCavities}
-                  teeth={teeth}
                   tooth={tooth}
                   position={'Derecha_inf'}
                 />
@@ -163,9 +174,8 @@ const FormInfoPaciente = () => {
             <div className="accordion-body d-flex flex-wrap gap-3">
               {teeth.Izquierda_inf.map((tooth) => (
                 <Tooth
-                  key={Object.keys(tooth)[0]}
+                  key={'IzqInf' + Object.keys(tooth)[0]}
                   changeCavities={changeCavities}
-                  teeth={teeth}
                   tooth={tooth}
                   position={'Izquierda_inf'}
                 />
