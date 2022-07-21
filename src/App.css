@@ -36,3 +36,44 @@
     transform: rotate(360deg);
   }
 }
+/* 
+
+*/
+.myIcon {
+  width: 40px;
+  height: 40px;
+}
+.myIcon > ion-icon{
+  font-size:40px;
+}
+
+
+.navActive{
+  text-decoration: underline;
+}
+
+
+.box_registro_diente {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  background-color: red;
+}
+
+.region{
+  width: 50%;
+  height: 50%;
+}
+
+
+.region_central{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 20px;
+  height: 20px;
+  left: 0;
+}
