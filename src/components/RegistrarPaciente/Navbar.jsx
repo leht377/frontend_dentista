@@ -1,6 +1,6 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-
+import dientes from '../../assets/img/dientes';
 const Navbar = ({ userName }) => {
   let navigate = useNavigate();
 
@@ -14,10 +14,21 @@ const Navbar = ({ userName }) => {
       <nav
         className="navbar navbar-expand-xl navbar-dark d-flex justify-content-between px-5 container-xxl"
         style={{
-          background: '#f4f4f4',
+          background: '',
         }}
       >
         <ul className="navbar-nav ">
+          <li className="nav-item me-4">
+            <Link to="/Dashboard">
+              <img
+                src={dientes.logo}
+                width={'40px'}
+                height={'40px'}
+                alt=""
+                style={{ cursor: 'pointer' }}
+              />
+            </Link>
+          </li>
           <li className="nav-item">
             <NavLink
               to={'/Dashboard/registrar'}
@@ -62,18 +73,14 @@ const Navbar = ({ userName }) => {
                   width: '40px',
                   height: '40px',
                   background:
-                    "url('https://s2.coinmarketcap.com/static/img/coins/64x64/14553.png')",
+                    "url('https://bestlistbd.com/wp-content/uploads/classified-listing/2021/10/dentist.png')",
                   backgroundPosition: 'center',
                   backgroundSize: 'cover',
                 }}
               ></div>
-              {userName}
             </button>
 
-            <ul
-              className="dropdown-menu dropdown-menu-dark"
-              aria-labelledby="dropdownMenuLink"
-            >
+            <ul className="dropdown-menu " aria-labelledby="dropdownMenuLink">
               <li>
                 <button onClick={logout} className="dropdown-item" href="#d">
                   Log out

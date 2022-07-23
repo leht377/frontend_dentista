@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { dataTeeth } from './helper';
 import Tooth from './Tooth';
 import Button from '../Button';
@@ -7,6 +8,11 @@ import Alert from '../Alert';
 const FormInfoPaciente = () => {
   const [teeth, setTeeth] = useState(dataTeeth);
   const [msg, setMsg] = useState(null);
+  const [nombre, setNombre] = useState('');
+  const [cedula, setCedula] = useState('');
+  const [edad, setEdad] = useState('');
+
+  let navigate = useNavigate();
 
   const changeCavities = useCallback(
     (position, newStateTooth) => {
@@ -28,6 +34,11 @@ const FormInfoPaciente = () => {
     setMsg('Paciente registrado satisfactoriamente');
     setTimeout(() => {
       setMsg(null);
+      setNombre('');
+      setCedula('');
+      setEdad('');
+      setTeeth(dataTeeth);
+      navigate('/Dashboard/buscar');
     }, 2000);
   };
 
@@ -43,15 +54,30 @@ const FormInfoPaciente = () => {
       <h3>Informacion personal</h3>
       <div className="col-12 mt-2">
         <label className="form-label">Nombre del paciente</label>
-        <input type="text" className="form-control" />
+        <input
+          type="text"
+          className="form-control"
+          value={nombre}
+          onChange={({ target }) => setNombre(target.value)}
+        />
       </div>
       <div className="col-6 mt-2">
         <label className="form-label">Edad</label>
-        <input type="text" className="form-control" />
+        <input
+          type="text"
+          className="form-control"
+          value={edad}
+          onChange={({ target }) => setEdad(target.value)}
+        />
       </div>
       <div className="col-6 mt-2">
         <label className="form-label">Cedula</label>
-        <input type="text" className="form-control" />
+        <input
+          type="text"
+          className="form-control"
+          value={cedula}
+          onChange={({ target }) => setCedula(target.value)}
+        />
       </div>
       <h3 className="mt-4">Registro de caries</h3>
       <div className="col-12 accordion">
@@ -74,7 +100,7 @@ const FormInfoPaciente = () => {
             aria-labelledby="headingOne"
             data-bs-parent="#accordionExample"
           >
-            <div className="accordion-body d-flex flex-wrap gap-3">
+            <div className="accordion-body d-flex flex-wrap gap-2">
               {teeth.Derecha_sup.map((tooth) => (
                 <Tooth
                   key={'DerSup' + Object.keys(tooth)[0]}
@@ -106,7 +132,7 @@ const FormInfoPaciente = () => {
             aria-labelledby="headingTwo"
             data-bs-parent="#accordionExample"
           >
-            <div className="accordion-body d-flex flex-wrap gap-3">
+            <div className="accordion-body d-flex flex-wrap gap-2">
               {teeth.Izquierda_sup.map((tooth) => (
                 <Tooth
                   key={'IzqSup' + Object.keys(tooth)[0]}
@@ -139,7 +165,7 @@ const FormInfoPaciente = () => {
             aria-labelledby="headingThree"
             data-bs-parent="#accordionExample"
           >
-            <div className="accordion-body d-flex flex-wrap gap-3">
+            <div className="accordion-body d-flex flex-wrap gap-2">
               {teeth.Derecha_inf.map((tooth) => (
                 <Tooth
                   key={'DerInf' + Object.keys(tooth)[0]}
@@ -171,7 +197,7 @@ const FormInfoPaciente = () => {
             aria-labelledby="headingFour"
             data-bs-parent="#accordionExample"
           >
-            <div className="accordion-body d-flex flex-wrap gap-3">
+            <div className="accordion-body d-flex flex-wrap gap-2">
               {teeth.Izquierda_inf.map((tooth) => (
                 <Tooth
                   key={'IzqInf' + Object.keys(tooth)[0]}

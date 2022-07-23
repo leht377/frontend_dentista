@@ -7,9 +7,9 @@ const Tooth = ({ changeCavities, position, tooth }) => {
   const [tipoDiente] = useState(Object.keys(tooth)[0]);
 
   useEffect(() => {
-    const newState = {};
-    newState[tipoDiente] = { Caries: { ...regiones } };
+    const newState = { [tipoDiente]: { Caries: { ...regiones } } };
     changeCavities(position, newState);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [regiones]);
 
   return (

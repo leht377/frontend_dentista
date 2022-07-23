@@ -19,16 +19,15 @@ const RegistrarPaciente = () => {
 
   return (
     <>
-      <main className="vh-100 container-xxl">
-        <section className="row ">
+      <main className=" container-xxl">
+        <section className="row px-5">
           <div className=" col-5 py-5">
-            <img src={dientes.dientes} alt="" />
+            <img src={dientes.dientes} height={'520px'} alt="" />
           </div>
           <div className="col-7 py-4">
             <FormInfoPaciente />
           </div>
         </section>
-        <div></div>
       </main>
     </>
   );
