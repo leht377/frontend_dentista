@@ -1,6 +1,4 @@
 import Filas from './Filas';
-import Pagination from './Pagination';
-
 const TablePaciente = ({ listaDepacientes = [] }) => {
   return (
     <>
@@ -26,7 +24,6 @@ const TablePaciente = ({ listaDepacientes = [] }) => {
           ))}
         </tbody>
       </table>
-      {/* <Pagination /> */}
     </>
   );
 };
