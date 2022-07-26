@@ -1,5 +1,5 @@
 import axios from 'axios';
-const baseurl = 'http://localhost:3001/api/phone';
+const baseurl = 'http://localhost:3001/api/patient';
 
 let token = null;
 
@@ -23,11 +23,11 @@ const getOne = async (id) => {
   return response.data;
 };
 
-const create = async (newPhone) => {
+const create = async (newPatient) => {
   const config = {
     headers: { Authorization: token },
   };
-  const response = await axios.post(baseurl, newPhone, config);
+  const response = await axios.post(baseurl, newPatient, config);
   return response.data;
 };
 

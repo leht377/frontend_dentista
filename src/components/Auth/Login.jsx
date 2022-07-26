@@ -14,24 +14,19 @@ const Login = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    navigate('/Dashboard');
-    if (false) {
-      try {
-        const dataUser = await loginServices.login({ username, password });
-        if (dataUser) {
-          window.localStorage.setItem(
-            'dataUserlogged',
-            JSON.stringify(dataUser)
-          );
-          navigate('/Dashboard');
-        }
-      } catch (error) {
-        setMsg('wrong username or password ');
-        setTypeMsg('error');
-        setTimeout(() => {
-          setMsg(null);
-        }, 3000);
+
+    try {
+      const dataUser = await loginServices.login({ username, password });
+      if (dataUser) {
+        window.localStorage.setItem('dataUserlogged', JSON.stringify(dataUser));
+        navigate('/Dashboard');
       }
+    } catch (error) {
+      setMsg('wrong username or password ');
+      setTypeMsg('error');
+      setTimeout(() => {
+        setMsg(null);
+      }, 3000);
     }
   };
 

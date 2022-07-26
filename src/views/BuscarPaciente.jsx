@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import FormSearch from '../components/BuscarPaciente/FormSeacrh';
 import TablePaciente from '../components/BuscarPaciente/table/TablePaciente';
+import pacienteServices from '../services/paciente';
 
 const BuscarPaciente = () => {
   const [search, setSearch] = useState('');
@@ -13,21 +14,32 @@ const BuscarPaciente = () => {
   };
 
   let params = useParams();
-  let cedulaAbucar = params.idPaciente;
+  let cedulaAbuscar = params.idPaciente;
 
   useEffect(() => {
-    if (cedulaAbucar) {
+    const userLocal = JSON.parse(window.localStorage.getItem('dataUserlogged'));
+    if (userLocal) {
+      pacienteServices.setToken(userLocal.token);
+    }
+
+    if (cedulaAbuscar) {
       console.log('feching by cedula');
+      pacienteServices.getOne(cedulaAbuscar).then((response) => {
+        const dataPaciente = response;
+        setListaPacientes(dataPaciente);
+      });
     } else {
       console.log('feching all data');
-      const listaP = [
-        { nombre: 'Luis', edad: '34', cedula: '12345666', _id: '1' },
-        { nombre: 'Carmen', edad: '34', cedula: '12345666', _id: '2' },
-        { nombre: 'Tomas', edad: '34', cedula: '12345666', _id: '3' },
-      ];
-      setListaPacientes(listaP);
+      // const listaP = [
+      //   { nombre: 'Luis', edad: '34', cedula: '12345666', _id: '1' },
+      //   { nombre: 'Carmen', edad: '34', cedula: '12345666', _id: '2' },
+      //   { nombre: 'Tomas', edad: '34', cedula: '12345666', _id: '3' },
+      // ];
+      pacienteServices.getAll().then((response) => {
+        setListaPacientes(response);
+      });
     }
-  }, [cedulaAbucar]);
+  }, [cedulaAbuscar]);
 
   return (
     <>

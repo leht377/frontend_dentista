@@ -4,10 +4,11 @@ import { dataTeeth } from './helper';
 import Tooth from './Tooth';
 import Button from '../Button';
 import Alert from '../Alert';
+import patientServices from '../../services/paciente';
 
 const FormInfoPaciente = () => {
   const [teeth, setTeeth] = useState(dataTeeth);
-  const [msg, setMsg] = useState(null);
+  const [msg, setMsg] = useState({ msg: null, type: null });
   const [nombre, setNombre] = useState('');
   const [cedula, setCedula] = useState('');
   const [edad, setEdad] = useState('');
@@ -29,17 +30,41 @@ const FormInfoPaciente = () => {
     [teeth]
   );
 
-  const handleFormPaciente = (event) => {
+  const handleFormPaciente = async (event) => {
     event.preventDefault();
-    setMsg('Paciente registrado satisfactoriamente');
-    setTimeout(() => {
-      setMsg(null);
-      setNombre('');
-      setCedula('');
-      setEdad('');
-      setTeeth(dataTeeth);
-      navigate('/Dashboard/buscar');
-    }, 2000);
+
+    const newPatient = {
+      nombre: nombre,
+      edad: edad,
+      cedula: cedula,
+      number: '0',
+      Derecha_sup: teeth['Derecha_sup'],
+      Derecha_inf: teeth['Derecha_inf'],
+      Izquierda_sup: teeth['Izquierda_sup'],
+      Izquierda_inf: teeth['Izquierda_inf'],
+    };
+
+    patientServices
+      .create(newPatient)
+      .then((response) => {
+        if (response) {
+          setMsg({ msg: 'Paciente registrado satisfactoriamente', type: '' });
+          setTimeout(() => {
+            setMsg({ msg: null, type: null });
+            setNombre('');
+            setCedula('');
+            setEdad('');
+            setTeeth(dataTeeth);
+            navigate('/Dashboard/buscar');
+          }, 4000);
+        }
+      })
+      .catch((error) => {
+        setMsg({ msg: 'No se pudo registrar el paciente', type: 'error' });
+        setTimeout(() => {
+          setMsg({ msg: null, type: null });
+        }, 4000);
+      });
   };
 
   useEffect(() => {
@@ -49,7 +74,7 @@ const FormInfoPaciente = () => {
   return (
     <form onSubmit={handleFormPaciente} className="row p-2">
       <div className="col-12 mt-2">
-        <Alert msg={msg} />
+        <Alert msg={msg.msg} type={msg.type} />
       </div>
       <h3>Informacion personal</h3>
       <div className="col-12 mt-2">

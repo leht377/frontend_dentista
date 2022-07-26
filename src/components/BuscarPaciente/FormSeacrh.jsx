@@ -13,6 +13,7 @@ const FormSearch = ({ search, setSearch, handleSearch }) => {
         placeholder="Buscar por cedula"
         aria-label="Search"
         value={search}
+        required
         onChange={({ target }) => setSearch(target.value)}
       />
       <Button text={'Buscar'} type="submit" width={'100px'} />

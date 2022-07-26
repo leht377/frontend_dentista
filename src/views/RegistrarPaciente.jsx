@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import dientes from '../assets/img/dientes';
 import FormInfoPaciente from '../components/RegistrarPaciente/FormInfoPaciente';
+import pacienteServices from '../services/paciente';
 
 const RegistrarPaciente = () => {
   // eslint-disable-next-line
@@ -10,11 +11,11 @@ const RegistrarPaciente = () => {
   let navigate = useNavigate();
 
   useEffect(() => {
-    // const user = JSON.parse(window.localStorage.getItem('dataUserlogged'));
-    // if (user) {
-    //   setUser(user);
-    //   directorioServices.setToken(user.token);
-    // }
+    const userLocal = JSON.parse(window.localStorage.getItem('dataUserlogged'));
+    if (userLocal) {
+      setUser(userLocal);
+      pacienteServices.setToken(userLocal.token);
+    }
   }, []);
 
   return (

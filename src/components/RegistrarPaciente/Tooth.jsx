@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Modal from './Modal';
 
 const Tooth = ({ changeCavities, position, tooth }) => {
   const ObjectCaries = tooth[Object.keys(tooth)[0]];
@@ -14,6 +15,7 @@ const Tooth = ({ changeCavities, position, tooth }) => {
 
   return (
     <div style={{ width: '320px', padding: '4px' }}>
+      <Modal />
       <h5 className="text-center">{tipoDiente}</h5>
       <div className=" d-flex justify-content-between align-items-center">
         <div className="">
