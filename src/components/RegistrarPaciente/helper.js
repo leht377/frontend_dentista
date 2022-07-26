@@ -1,172 +1,364 @@
-const dataTeeth = {
-  Derecha_sup: [
-    {
-      'Tercer molar ': {
-        Caries: { 1: false, 2: false, 3: false, 4: false, 5: false },
+const DefaTeeth = {
+  derechaSuperior: {
+    1: {
+      name: 'Tercer molar',
+      regiones: { 1: false, 2: false, 3: false, 4: false, 5: false },
+      anotaciones: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
       },
     },
-    {
-      'Segundo molar ': {
-        Caries: { 1: false, 2: false, 3: false, 4: false, 5: false },
+    2: {
+      name: 'Segundo molar',
+      regiones: { 1: false, 2: false, 3: false, 4: false, 5: false },
+      anotaciones: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
       },
     },
-    {
-      'Primer molar ': {
-        Caries: { 1: false, 2: false, 3: false, 4: false, 5: false },
+    3: {
+      name: 'Primer molar',
+      regiones: { 1: false, 2: false, 3: false, 4: false, 5: false },
+      anotaciones: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
       },
     },
-    {
-      'Segundo premolar ': {
-        Caries: { 1: false, 2: false, 3: false, 4: false, 5: false },
+    4: {
+      name: 'Segundo premolar',
+      regiones: { 1: false, 2: false, 3: false, 4: false, 5: false },
+      anotaciones: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
       },
     },
-    {
-      'Primer premolar ': {
-        Caries: { 1: false, 2: false, 3: false, 4: false, 5: false },
+    5: {
+      name: 'Primer premolar',
+      regiones: { 1: false, 2: false, 3: false, 4: false, 5: false },
+      anotaciones: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
       },
     },
-    {
-      'Canino ': {
-        Caries: { 1: false, 2: false, 3: false, 4: false, 5: false },
+    6: {
+      name: 'Canino',
+      regiones: { 1: false, 2: false, 3: false, 4: false, 5: false },
+      anotaciones: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
       },
     },
-    {
-      'Incisivo lateral ': {
-        Caries: { 1: false, 2: false, 3: false, 4: false, 5: false },
+    7: {
+      name: 'Incisivo lateral',
+      regiones: { 1: false, 2: false, 3: false, 4: false, 5: false },
+      anotaciones: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
       },
     },
-    {
-      'Incisivo central ': {
-        Caries: { 1: false, 2: false, 3: false, 4: false, 5: false },
+    8: {
+      name: 'Incisivo central',
+      regiones: { 1: false, 2: false, 3: false, 4: false, 5: false },
+      anotaciones: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
       },
     },
-  ],
-  Izquierda_sup: [
-    {
-      'Tercer molar ': {
-        Caries: { 1: false, 2: false, 3: false, 4: false, 5: false },
+  },
+  izquierdaSuperior: {
+    9: {
+      name: 'Tercer molar',
+      regiones: { 1: false, 2: false, 3: false, 4: false, 5: false },
+      anotaciones: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
       },
     },
-    {
-      'Segundo molar ': {
-        Caries: { 1: false, 2: false, 3: false, 4: false, 5: false },
+    10: {
+      name: 'Segundo molar',
+      regiones: { 1: false, 2: false, 3: false, 4: false, 5: false },
+      anotaciones: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
       },
     },
-    {
-      'Primer molar ': {
-        Caries: { 1: false, 2: false, 3: false, 4: false, 5: false },
+    11: {
+      name: 'Primer molar',
+      regiones: { 1: false, 2: false, 3: false, 4: false, 5: false },
+      anotaciones: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
       },
     },
-    {
-      'Segundo premolar ': {
-        Caries: { 1: false, 2: false, 3: false, 4: false, 5: false },
+    12: {
+      name: 'Segundo premolar',
+      regiones: { 1: false, 2: false, 3: false, 4: false, 5: false },
+      anotaciones: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
       },
     },
-    {
-      'Primer premolar ': {
-        Caries: { 1: false, 2: false, 3: false, 4: false, 5: false },
+    13: {
+      name: 'Primer premolar',
+      regiones: { 1: false, 2: false, 3: false, 4: false, 5: false },
+      anotaciones: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
       },
     },
-    {
-      'Canino ': {
-        Caries: { 1: false, 2: false, 3: false, 4: false, 5: false },
+    14: {
+      name: 'Canino',
+      regiones: { 1: false, 2: false, 3: false, 4: false, 5: false },
+      anotaciones: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
       },
     },
-    {
-      'Incisivo lateral ': {
-        Caries: { 1: false, 2: false, 3: false, 4: false, 5: false },
+    15: {
+      name: 'Incisivo lateral',
+      regiones: { 1: false, 2: false, 3: false, 4: false, 5: false },
+      anotaciones: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
       },
     },
-    {
-      'Incisivo central ': {
-        Caries: { 1: false, 2: false, 3: false, 4: false, 5: false },
+    16: {
+      name: 'Incisivo central',
+      regiones: { 1: false, 2: false, 3: false, 4: false, 5: false },
+      anotaciones: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
       },
     },
-  ],
-  Derecha_inf: [
-    {
-      'Tercer molar ': {
-        Caries: { 1: false, 2: false, 3: false, 4: false, 5: false },
+  },
+  izquierdaInferior: {
+    17: {
+      name: 'Tercer molar',
+      regiones: { 1: false, 2: false, 3: false, 4: false, 5: false },
+      anotaciones: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
       },
     },
-    {
-      'Segundo molar ': {
-        Caries: { 1: false, 2: false, 3: false, 4: false, 5: false },
+    18: {
+      name: 'Segundo molar',
+      regiones: { 1: false, 2: false, 3: false, 4: false, 5: false },
+      anotaciones: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
       },
     },
-    {
-      'Primer molar ': {
-        Caries: { 1: false, 2: false, 3: false, 4: false, 5: false },
+    19: {
+      name: 'Primer molar',
+      regiones: { 1: false, 2: false, 3: false, 4: false, 5: false },
+      anotaciones: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
       },
     },
-    {
-      'Segundo premolar ': {
-        Caries: { 1: false, 2: false, 3: false, 4: false, 5: false },
+    20: {
+      name: 'Segundo premolar',
+      regiones: { 1: false, 2: false, 3: false, 4: false, 5: false },
+      anotaciones: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
       },
     },
-    {
-      'Primer premolar ': {
-        Caries: { 1: false, 2: false, 3: false, 4: false, 5: false },
+    21: {
+      name: 'Primer premolar',
+      regiones: { 1: false, 2: false, 3: false, 4: false, 5: false },
+      anotaciones: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
       },
     },
-    {
-      'Canino ': {
-        Caries: { 1: false, 2: false, 3: false, 4: false, 5: false },
+    22: {
+      name: 'Canino',
+      regiones: { 1: false, 2: false, 3: false, 4: false, 5: false },
+      anotaciones: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
       },
     },
-    {
-      'Incisivo lateral ': {
-        Caries: { 1: false, 2: false, 3: false, 4: false, 5: false },
+    23: {
+      name: 'Incisivo lateral',
+      regiones: { 1: false, 2: false, 3: false, 4: false, 5: false },
+      anotaciones: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
       },
     },
-    {
-      'Incisivo central ': {
-        Caries: { 1: false, 2: false, 3: false, 4: false, 5: false },
+    24: {
+      name: 'Incisivo central',
+      regiones: { 1: false, 2: false, 3: false, 4: false, 5: false },
+      anotaciones: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
       },
     },
-  ],
-  Izquierda_inf: [
-    {
-      'Tercer molar ': {
-        Caries: { 1: false, 2: false, 3: false, 4: false, 5: false },
+  },
+  derechaInferior: {
+    25: {
+      name: 'Tercer molar',
+      regiones: { 1: false, 2: false, 3: false, 4: false, 5: false },
+      anotaciones: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
       },
     },
-    {
-      'Segundo molar ': {
-        Caries: { 1: false, 2: false, 3: false, 4: false, 5: false },
+    26: {
+      name: 'Segundo molar',
+      regiones: { 1: false, 2: false, 3: false, 4: false, 5: false },
+      anotaciones: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
       },
     },
-    {
-      'Primer molar ': {
-        Caries: { 1: false, 2: false, 3: false, 4: false, 5: false },
+    27: {
+      name: 'Primer molar',
+      regiones: { 1: false, 2: false, 3: false, 4: false, 5: false },
+      anotaciones: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
       },
     },
-    {
-      'Segundo premolar ': {
-        Caries: { 1: false, 2: false, 3: false, 4: false, 5: false },
+    28: {
+      name: 'Segundo premolar',
+      regiones: { 1: false, 2: false, 3: false, 4: false, 5: false },
+      anotaciones: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
       },
     },
-    {
-      'Primer premolar ': {
-        Caries: { 1: false, 2: false, 3: false, 4: false, 5: false },
+    29: {
+      name: 'Primer premolar',
+      regiones: { 1: false, 2: false, 3: false, 4: false, 5: false },
+      anotaciones: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
       },
     },
-    {
-      'Canino ': {
-        Caries: { 1: false, 2: false, 3: false, 4: false, 5: false },
+    30: {
+      name: 'Canino',
+      regiones: { 1: false, 2: false, 3: false, 4: false, 5: false },
+      anotaciones: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
       },
     },
-    {
-      'Incisivo lateral ': {
-        Caries: { 1: false, 2: false, 3: false, 4: false, 5: false },
+    31: {
+      name: 'Incisivo lateral',
+      regiones: { 1: false, 2: false, 3: false, 4: false, 5: false },
+      anotaciones: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
       },
     },
-    {
-      'Incisivo central ': {
-        Caries: { 1: false, 2: false, 3: false, 4: false, 5: false },
+    32: {
+      name: 'Incisivo central',
+      regiones: { 1: false, 2: false, 3: false, 4: false, 5: false },
+      anotaciones: {
+        1: {},
+        2: {},
+        3: {},
+        4: {},
+        5: {},
       },
     },
-  ],
+  },
 };
 
-module.exports = { dataTeeth };
+module.exports = { DefaTeeth };

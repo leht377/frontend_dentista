@@ -1,13 +1,17 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { dataTeeth } from './helper';
+import { DefaTeeth } from './helper';
 import Tooth from './Tooth';
 import Button from '../Button';
 import Alert from '../Alert';
 import patientServices from '../../services/paciente';
 
 const FormInfoPaciente = () => {
-  const [teeth, setTeeth] = useState(dataTeeth);
+  const [derechaSup, setDerechaSup] = useState(DefaTeeth.derechaSuperior);
+  const [derechaInf, setDerechaInf] = useState(DefaTeeth.derechaInferior);
+  const [izquierdaSup, setIzquierdaSup] = useState(DefaTeeth.izquierdaSuperior);
+  const [izquierdaInf, setIzquierdaInf] = useState(DefaTeeth.izquierdaInferior);
+
   const [msg, setMsg] = useState({ msg: null, type: null });
   const [nombre, setNombre] = useState('');
   const [cedula, setCedula] = useState('');
@@ -15,20 +19,57 @@ const FormInfoPaciente = () => {
 
   let navigate = useNavigate();
 
-  const changeCavities = useCallback(
-    (position, newStateTooth) => {
-      const updateState = teeth[position].map((tooth) => {
-        if (Object.keys(tooth)[0] === Object.keys(newStateTooth)[0]) {
-          return newStateTooth;
-        }
-        return tooth;
-      });
-      const newStatePosition = { ...teeth };
-      newStatePosition[position] = updateState;
-      setTeeth(newStatePosition);
-    },
-    [teeth]
-  );
+  // const changeCavities = useCallback(
+  //   (position, newStateTooth) => {
+  //     const updateState = teeth[position].map((tooth) => {
+  //       if (Object.keys(tooth)[0] === Object.keys(newStateTooth)[0]) {
+  //         return newStateTooth;
+  //       }
+  //       return tooth;
+  //     });
+  //     const newStatePosition = { ...teeth };
+  //     newStatePosition[position] = updateState;
+  //     setTeeth(newStatePosition);
+  //   },
+  //   [teeth]
+  // );
+  const handleSetInfoSector = (sector, newStated, numeroDiente) => {
+    switch (sector) {
+      case 'derechaSuperior':
+        setDerechaSup({
+          ...derechaSup,
+          [numeroDiente]: { ...derechaSup[numeroDiente], regiones: newStated },
+        });
+
+        break;
+      case 'derechaInferior':
+        setDerechaInf({
+          ...derechaInf,
+          [numeroDiente]: { ...derechaInf[numeroDiente], regiones: newStated },
+        });
+        break;
+      case 'izquierdaSuperior':
+        setIzquierdaSup({
+          ...izquierdaSup,
+          [numeroDiente]: {
+            ...izquierdaSup[numeroDiente],
+            regiones: newStated,
+          },
+        });
+        break;
+      case 'izquierdaInferior':
+        setIzquierdaInf({
+          ...izquierdaInf,
+          [numeroDiente]: {
+            ...izquierdaInf[numeroDiente],
+            regiones: newStated,
+          },
+        });
+        break;
+      default:
+        break;
+    }
+  };
 
   const handleFormPaciente = async (event) => {
     event.preventDefault();
@@ -38,10 +79,10 @@ const FormInfoPaciente = () => {
       edad: edad,
       cedula: cedula,
       number: '0',
-      Derecha_sup: teeth['Derecha_sup'],
-      Derecha_inf: teeth['Derecha_inf'],
-      Izquierda_sup: teeth['Izquierda_sup'],
-      Izquierda_inf: teeth['Izquierda_inf'],
+      Derecha_sup: derechaSup,
+      Derecha_inf: derechaInf,
+      Izquierda_sup: izquierdaSup,
+      Izquierda_inf: izquierdaInf,
     };
 
     patientServices
@@ -54,13 +95,14 @@ const FormInfoPaciente = () => {
             setNombre('');
             setCedula('');
             setEdad('');
-            setTeeth(dataTeeth);
+            // setTeeth(DefaTeeth);
             navigate('/Dashboard/buscar');
           }, 4000);
         }
       })
       .catch((error) => {
         setMsg({ msg: 'No se pudo registrar el paciente', type: 'error' });
+        setDerechaSup(DefaTeeth.derechaSuperior);
         setTimeout(() => {
           setMsg({ msg: null, type: null });
         }, 4000);
@@ -126,12 +168,13 @@ const FormInfoPaciente = () => {
             data-bs-parent="#accordionExample"
           >
             <div className="accordion-body d-flex flex-wrap gap-2">
-              {teeth.Derecha_sup.map((tooth) => (
+              {Object.keys(derechaSup).map((key) => (
                 <Tooth
-                  key={'DerSup' + Object.keys(tooth)[0]}
-                  changeCavities={changeCavities}
-                  tooth={tooth}
-                  position={'Derecha_sup'}
+                  key={key}
+                  tooth={derechaSup[key]}
+                  numero={key}
+                  handleSetInfoSector={handleSetInfoSector}
+                  sector={'derechaSuperior'}
                 />
               ))}
             </div>
@@ -158,45 +201,13 @@ const FormInfoPaciente = () => {
             data-bs-parent="#accordionExample"
           >
             <div className="accordion-body d-flex flex-wrap gap-2">
-              {teeth.Izquierda_sup.map((tooth) => (
+              {Object.keys(izquierdaSup).map((key) => (
                 <Tooth
-                  key={'IzqSup' + Object.keys(tooth)[0]}
-                  title={Object.keys(tooth)[0]}
-                  changeCavities={changeCavities}
-                  tooth={tooth}
-                  position={'Izquierda_sup'}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="accordion-item col-12 ">
-          <h2 className="accordion-header" id="headingThree">
-            <button
-              className="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseThree"
-              aria-expanded="true"
-              aria-controls="collapseThree"
-            >
-              Dientes inferiores derechos
-            </button>
-          </h2>
-          <div
-            id="collapseThree"
-            className="accordion-collapse collapse"
-            aria-labelledby="headingThree"
-            data-bs-parent="#accordionExample"
-          >
-            <div className="accordion-body d-flex flex-wrap gap-2">
-              {teeth.Derecha_inf.map((tooth) => (
-                <Tooth
-                  key={'DerInf' + Object.keys(tooth)[0]}
-                  changeCavities={changeCavities}
-                  tooth={tooth}
-                  position={'Derecha_inf'}
+                  key={key}
+                  tooth={izquierdaSup[key]}
+                  numero={key}
+                  handleSetInfoSector={handleSetInfoSector}
+                  sector={'izquierdaSuperior'}
                 />
               ))}
             </div>
@@ -223,12 +234,46 @@ const FormInfoPaciente = () => {
             data-bs-parent="#accordionExample"
           >
             <div className="accordion-body d-flex flex-wrap gap-2">
-              {teeth.Izquierda_inf.map((tooth) => (
+              {Object.keys(izquierdaInf).map((key) => (
                 <Tooth
-                  key={'IzqInf' + Object.keys(tooth)[0]}
-                  changeCavities={changeCavities}
-                  tooth={tooth}
-                  position={'Izquierda_inf'}
+                  key={key}
+                  tooth={izquierdaInf[key]}
+                  numero={key}
+                  handleSetInfoSector={handleSetInfoSector}
+                  sector={'izquierdaInferior'}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="accordion-item col-12 ">
+          <h2 className="accordion-header" id="headingThree">
+            <button
+              className="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseThree"
+              aria-expanded="true"
+              aria-controls="collapseThree"
+            >
+              Dientes inferiores derechos
+            </button>
+          </h2>
+          <div
+            id="collapseThree"
+            className="accordion-collapse collapse"
+            aria-labelledby="headingThree"
+            data-bs-parent="#accordionExample"
+          >
+            <div className="accordion-body d-flex flex-wrap gap-2">
+              {Object.keys(derechaInf).map((key) => (
+                <Tooth
+                  key={key}
+                  tooth={derechaInf[key]}
+                  numero={key}
+                  handleSetInfoSector={handleSetInfoSector}
+                  sector={'derechaInferior'}
                 />
               ))}
             </div>
