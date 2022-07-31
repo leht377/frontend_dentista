@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { DefaTeeth } from './helper';
 import Tooth from './Tooth';
 import Button from '../Button';
@@ -12,59 +11,27 @@ const FormInfoPaciente = () => {
   const [izquierdaSup, setIzquierdaSup] = useState(DefaTeeth.izquierdaSuperior);
   const [izquierdaInf, setIzquierdaInf] = useState(DefaTeeth.izquierdaInferior);
 
-  const [msg, setMsg] = useState({ msg: null, type: null });
+  const [msg, setMsg] = useState({
+    msg: null,
+    type: null,
+  });
   const [nombre, setNombre] = useState('');
   const [cedula, setCedula] = useState('');
   const [edad, setEdad] = useState('');
 
-  let navigate = useNavigate();
-
-  // const changeCavities = useCallback(
-  //   (position, newStateTooth) => {
-  //     const updateState = teeth[position].map((tooth) => {
-  //       if (Object.keys(tooth)[0] === Object.keys(newStateTooth)[0]) {
-  //         return newStateTooth;
-  //       }
-  //       return tooth;
-  //     });
-  //     const newStatePosition = { ...teeth };
-  //     newStatePosition[position] = updateState;
-  //     setTeeth(newStatePosition);
-  //   },
-  //   [teeth]
-  // );
-  const handleSetInfoSector = (sector, newStated, numeroDiente) => {
+  const handleSetInfoTooth = (sector, newStateTooth, numeroDiente) => {
     switch (sector) {
       case 'derechaSuperior':
-        setDerechaSup({
-          ...derechaSup,
-          [numeroDiente]: { ...derechaSup[numeroDiente], regiones: newStated },
-        });
-
+        setDerechaSup({ ...derechaSup, [numeroDiente]: newStateTooth });
         break;
       case 'derechaInferior':
-        setDerechaInf({
-          ...derechaInf,
-          [numeroDiente]: { ...derechaInf[numeroDiente], regiones: newStated },
-        });
+        setDerechaInf({ ...derechaInf, [numeroDiente]: newStateTooth });
         break;
       case 'izquierdaSuperior':
-        setIzquierdaSup({
-          ...izquierdaSup,
-          [numeroDiente]: {
-            ...izquierdaSup[numeroDiente],
-            regiones: newStated,
-          },
-        });
+        setIzquierdaSup({ ...izquierdaSup, [numeroDiente]: newStateTooth });
         break;
       case 'izquierdaInferior':
-        setIzquierdaInf({
-          ...izquierdaInf,
-          [numeroDiente]: {
-            ...izquierdaInf[numeroDiente],
-            regiones: newStated,
-          },
-        });
+        setIzquierdaInf({ ...izquierdaInf, [numeroDiente]: newStateTooth });
         break;
       default:
         break;
@@ -85,24 +52,34 @@ const FormInfoPaciente = () => {
       Izquierda_inf: izquierdaInf,
     };
 
+    setMsg({
+      msg: 'Procesando solicitud...',
+      type: 'waiting',
+    });
+
     patientServices
       .create(newPatient)
       .then((response) => {
         if (response) {
-          setMsg({ msg: 'Paciente registrado satisfactoriamente', type: '' });
+          setMsg({
+            msg: 'Paciente registrado satisfactoriamente',
+            type: 'success',
+          });
           setTimeout(() => {
             setMsg({ msg: null, type: null });
             setNombre('');
             setCedula('');
             setEdad('');
-            // setTeeth(DefaTeeth);
-            navigate('/Dashboard/buscar');
+            setDerechaSup(DefaTeeth.derechaSuperior);
+            setDerechaInf(DefaTeeth.derechaInferior);
+            setIzquierdaInf(DefaTeeth.izquierdaInferior);
+            setIzquierdaSup(DefaTeeth.izquierdaSuperior);
+            // navigate('/Dashboard/buscar');
           }, 4000);
         }
       })
       .catch((error) => {
         setMsg({ msg: 'No se pudo registrar el paciente', type: 'error' });
-        setDerechaSup(DefaTeeth.derechaSuperior);
         setTimeout(() => {
           setMsg({ msg: null, type: null });
         }, 4000);
@@ -125,6 +102,7 @@ const FormInfoPaciente = () => {
           type="text"
           className="form-control"
           value={nombre}
+          required
           onChange={({ target }) => setNombre(target.value)}
         />
       </div>
@@ -134,6 +112,7 @@ const FormInfoPaciente = () => {
           type="text"
           className="form-control"
           value={edad}
+          required
           onChange={({ target }) => setEdad(target.value)}
         />
       </div>
@@ -142,6 +121,7 @@ const FormInfoPaciente = () => {
         <input
           type="text"
           className="form-control"
+          required
           value={cedula}
           onChange={({ target }) => setCedula(target.value)}
         />
@@ -173,7 +153,7 @@ const FormInfoPaciente = () => {
                   key={key}
                   tooth={derechaSup[key]}
                   numero={key}
-                  handleSetInfoSector={handleSetInfoSector}
+                  handleSetInfoTooth={handleSetInfoTooth}
                   sector={'derechaSuperior'}
                 />
               ))}
@@ -206,7 +186,7 @@ const FormInfoPaciente = () => {
                   key={key}
                   tooth={izquierdaSup[key]}
                   numero={key}
-                  handleSetInfoSector={handleSetInfoSector}
+                  handleSetInfoTooth={handleSetInfoTooth}
                   sector={'izquierdaSuperior'}
                 />
               ))}
@@ -239,7 +219,7 @@ const FormInfoPaciente = () => {
                   key={key}
                   tooth={izquierdaInf[key]}
                   numero={key}
-                  handleSetInfoSector={handleSetInfoSector}
+                  handleSetInfoTooth={handleSetInfoTooth}
                   sector={'izquierdaInferior'}
                 />
               ))}
@@ -272,7 +252,7 @@ const FormInfoPaciente = () => {
                   key={key}
                   tooth={derechaInf[key]}
                   numero={key}
-                  handleSetInfoSector={handleSetInfoSector}
+                  handleSetInfoTooth={handleSetInfoTooth}
                   sector={'derechaInferior'}
                 />
               ))}

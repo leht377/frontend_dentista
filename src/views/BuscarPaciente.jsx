@@ -30,11 +30,6 @@ const BuscarPaciente = () => {
       });
     } else {
       console.log('feching all data');
-      // const listaP = [
-      //   { nombre: 'Luis', edad: '34', cedula: '12345666', _id: '1' },
-      //   { nombre: 'Carmen', edad: '34', cedula: '12345666', _id: '2' },
-      //   { nombre: 'Tomas', edad: '34', cedula: '12345666', _id: '3' },
-      // ];
       pacienteServices.getAll().then((response) => {
         setListaPacientes(response);
       });

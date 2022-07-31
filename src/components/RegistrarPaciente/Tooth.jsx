@@ -1,13 +1,53 @@
-import { useEffect } from 'react';
+import { useState } from 'react';
+import Modal from '../RegistrarPaciente/Modal';
+const Tooth = ({ tooth, numero, sector, handleSetInfoTooth }) => {
+  const [sectionSelected, setSetionSelected] = useState(1);
 
-const Tooth = ({ tooth, numero, sector, handleSetInfoSector }) => {
+  var idModal = tooth.name.replace(' ', '') + sector.replace(' ', '');
+  var idButton = tooth.name.replace(' ', '-') + sector.replace(' ', '-');
+
   const cambiarCheck = (value, region) => {
-    const newRegiones = { ...tooth['regiones'], [region]: value };
-    handleSetInfoSector(sector, newRegiones, numero);
+    setSetionSelected(region);
+    document.getElementById(idButton).click();
+  };
+
+  const handleInfoBySector = (newStatedAnotaciones) => {
+    const newStatedRegiones = {
+      ...tooth['regiones'],
+      [sectionSelected]: true,
+    };
+
+    const newStatedTooth = {
+      name: tooth.name,
+      regiones: newStatedRegiones,
+      anotaciones: {
+        ...tooth['anotaciones'],
+        [sectionSelected]: newStatedAnotaciones,
+      },
+    };
+    handleSetInfoTooth(sector, newStatedTooth, numero);
   };
 
   return (
     <div style={{ width: '320px', padding: '4px' }}>
+      <Modal
+        tooth={tooth}
+        idModal={idModal}
+        numero={numero}
+        regionTooth={sectionSelected}
+        anotacionesbyRegion={tooth['anotaciones'][sectionSelected]}
+        handleInfoBySector={handleInfoBySector}
+      />
+      <button
+        type="button"
+        className="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target={`#${idModal}`}
+        id={idButton}
+        hidden
+      >
+        Launch demo modal
+      </button>
       <h5 className="text-center"> {`${numero}. ${tooth.name}`}</h5>
       <div className=" d-flex justify-content-between align-items-center">
         <div className="">
