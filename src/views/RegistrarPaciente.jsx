@@ -10,6 +10,7 @@ const RegistrarPaciente = () => {
   // eslint-disable-next-line
   let navigate = useNavigate();
 
+  console.log('nuevo');
   useEffect(() => {
     const userLocal = JSON.parse(window.localStorage.getItem('dataUserlogged'));
     if (userLocal) {
