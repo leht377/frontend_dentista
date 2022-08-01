@@ -20,7 +20,7 @@ const getOne = async (id) => {
     headers: { Authorization: token },
   };
   const response = await axios.get(`${baseurl}/${id}`, config);
-  return response.data;
+  return response.data[0];
 };
 
 const create = async (newPatient) => {

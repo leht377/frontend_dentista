@@ -23,13 +23,11 @@ const BuscarPaciente = () => {
     }
 
     if (cedulaAbuscar) {
-      console.log('feching by cedula');
       pacienteServices.getOne(cedulaAbuscar).then((response) => {
         const dataPaciente = response;
-        setListaPacientes(dataPaciente);
+        setListaPacientes([dataPaciente]);
       });
     } else {
-      console.log('feching all data');
       pacienteServices.getAll().then((response) => {
         setListaPacientes(response);
       });
