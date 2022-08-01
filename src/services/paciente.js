@@ -1,5 +1,5 @@
 import axios from 'axios';
-const baseurl = 'http://localhost:3001/api/patient';
+const baseurl = 'api/patient';
 
 let token = null;
 
