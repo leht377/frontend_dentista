@@ -6,6 +6,8 @@ import Autentication from './views/Autentication';
 import BuscarPaciente from './views/BuscarPaciente';
 import RegistrarPaciente from './views/RegistrarPaciente';
 import dientes from './assets/img/dientes';
+import InfoPaciente from './views/InfoPaciente';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const PaginaInicio = () => {
   return (
@@ -26,6 +28,7 @@ root.render(
         <Route path="buscar" element={<BuscarPaciente />}>
           <Route path=":idPaciente" element={<BuscarPaciente />} />
         </Route>
+        <Route path="infopaciente/:idPaciente" element={<InfoPaciente />} />
       </Route>
       <Route path="*" element={<p>No existe</p>} />
     </Routes>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-const baseurl = 'http://localhost:3001/api/login';
+const baseurl = 'api/login';
 
 // const fakeLogin = async (credenciales) => {
 //   const response = await axios.get(baseurl);

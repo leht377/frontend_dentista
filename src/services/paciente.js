@@ -1,5 +1,5 @@
 import axios from 'axios';
-const baseurl = 'http://localhost:3001/api/patient';
+const baseurl = 'api/patient';
 
 let token = null;
 
@@ -20,7 +20,7 @@ const getOne = async (id) => {
     headers: { Authorization: token },
   };
   const response = await axios.get(`${baseurl}/${id}`, config);
-  return response.data;
+  return response.data[0];
 };
 
 const create = async (newPatient) => {
