@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { DefaTeeth } from './helper';
-import Tooth from './Tooth';
 import Button from '../Button';
 import Alert from '../Alert';
 import patientServices from '../../services/paciente';
+import { AcordionContainer } from '../AcordionContainer';
+import { AcordionItem } from '../AcordionItem';
+import TeentBySector from './TeentBySector';
 
 const FormInfoPaciente = () => {
   const [derechaSup, setDerechaSup] = useState(DefaTeeth.derechaSuperior);
@@ -15,6 +17,7 @@ const FormInfoPaciente = () => {
     msg: null,
     type: null,
   });
+
   const [nombre, setNombre] = useState('');
   const [cedula, setCedula] = useState('');
   const [edad, setEdad] = useState('');
@@ -127,139 +130,38 @@ const FormInfoPaciente = () => {
         />
       </div>
       <h3 className="mt-4">Registro de caries</h3>
-      <div className="col-12 accordion">
-        <div className="accordion-item col-12 ">
-          <h2 className="accordion-header" id="headingOne">
-            <button
-              className="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseOne"
-              aria-expanded="true"
-              aria-controls="collapseOne"
-            >
-              Dientes superiores Derechos
-            </button>
-          </h2>
-          <div
-            id="collapseOne"
-            className="accordion-collapse collapse"
-            aria-labelledby="headingOne"
-            data-bs-parent="#accordionExample"
-          >
-            <div className="accordion-body d-flex flex-wrap gap-2">
-              {Object.keys(derechaSup).map((key) => (
-                <Tooth
-                  key={key}
-                  tooth={derechaSup[key]}
-                  numero={key}
-                  handleSetInfoTooth={handleSetInfoTooth}
-                  sector={'derechaSuperior'}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
 
-        <div className="accordion-item col-12 ">
-          <h2 className="accordion-header" id="headingTwo">
-            <button
-              className="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseTwo"
-              aria-expanded="true"
-              aria-controls="collapseTwo"
-            >
-              Dientes superiores Izquierdo
-            </button>
-          </h2>
-          <div
-            id="collapseTwo"
-            className="accordion-collapse collapse"
-            aria-labelledby="headingTwo"
-            data-bs-parent="#accordionExample"
-          >
-            <div className="accordion-body d-flex flex-wrap gap-2">
-              {Object.keys(izquierdaSup).map((key) => (
-                <Tooth
-                  key={key}
-                  tooth={izquierdaSup[key]}
-                  numero={key}
-                  handleSetInfoTooth={handleSetInfoTooth}
-                  sector={'izquierdaSuperior'}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
+      <AcordionContainer>
+        <AcordionItem id={1} title={'Dientes superiores Derecha'}>
+          <TeentBySector
+            sectorName={'derechaSuperior'}
+            teentSector={derechaSup}
+            handleSetInfoTooth={handleSetInfoTooth}
+          />
+        </AcordionItem>
+        <AcordionItem id={2} title={'Dientes superiores Izquierdo'}>
+          <TeentBySector
+            sectorName={'izquierdaSuperior'}
+            teentSector={izquierdaSup}
+            handleSetInfoTooth={handleSetInfoTooth}
+          />
+        </AcordionItem>
+        <AcordionItem id={3} title={'Dientes inferiores izquierdo'}>
+          <TeentBySector
+            sectorName={'izquierdaInferior'}
+            teentSector={izquierdaInf}
+            handleSetInfoTooth={handleSetInfoTooth}
+          />
+        </AcordionItem>
+        <AcordionItem id={4} title={'Dientes inferiores derechos'}>
+          <TeentBySector
+            sectorName={'derechaInferior'}
+            teentSector={derechaInf}
+            handleSetInfoTooth={handleSetInfoTooth}
+          />
+        </AcordionItem>
+      </AcordionContainer>
 
-        <div className="accordion-item col-12 ">
-          <h2 className="accordion-header" id="headingFour">
-            <button
-              className="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseFour"
-              aria-expanded="true"
-              aria-controls="collapseFour"
-            >
-              Dientes inferiores izquierdo
-            </button>
-          </h2>
-          <div
-            id="collapseFour"
-            className="accordion-collapse collapse"
-            aria-labelledby="headingFour"
-            data-bs-parent="#accordionExample"
-          >
-            <div className="accordion-body d-flex flex-wrap gap-2">
-              {Object.keys(izquierdaInf).map((key) => (
-                <Tooth
-                  key={key}
-                  tooth={izquierdaInf[key]}
-                  numero={key}
-                  handleSetInfoTooth={handleSetInfoTooth}
-                  sector={'izquierdaInferior'}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="accordion-item col-12 ">
-          <h2 className="accordion-header" id="headingThree">
-            <button
-              className="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseThree"
-              aria-expanded="true"
-              aria-controls="collapseThree"
-            >
-              Dientes inferiores derechos
-            </button>
-          </h2>
-          <div
-            id="collapseThree"
-            className="accordion-collapse collapse"
-            aria-labelledby="headingThree"
-            data-bs-parent="#accordionExample"
-          >
-            <div className="accordion-body d-flex flex-wrap gap-2">
-              {Object.keys(derechaInf).map((key) => (
-                <Tooth
-                  key={key}
-                  tooth={derechaInf[key]}
-                  numero={key}
-                  handleSetInfoTooth={handleSetInfoTooth}
-                  sector={'derechaInferior'}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
       <div className="col-12 mt-4">
         <Button text={'Guardar informacion'} type={'submit'}></Button>
       </div>

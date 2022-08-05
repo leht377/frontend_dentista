@@ -62,6 +62,8 @@ const Login = () => {
         <div className="d-grid">
           <Button type={'submit'} text={'Ingresar'} />
         </div>
+
+        <span>Usuario: Anibal94 contreseña: 12345</span>
       </form>
     </>
   );

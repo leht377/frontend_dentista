@@ -13,7 +13,7 @@ const TablePaciente = ({ listaDepacientes = [] }) => {
           </tr>
         </thead>
         <tbody>
-          {listaDepacientes.map((paciente) => (
+          {listaDepacientes?.map((paciente) => (
             <Filas
               nombre={paciente.nombre}
               cedula={paciente.cedula}
