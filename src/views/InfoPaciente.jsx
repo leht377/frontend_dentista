@@ -12,22 +12,24 @@ const InfoPaciente = () => {
   const [derechaInf, setDerechaInf] = useState(null);
   const [izquierdaSup, setIzquierdaSup] = useState(null);
   const [izquierdaInf, setIzquierdaInf] = useState(null);
-
+  const [alergias, setAlergias] = useState(null);
   const { idPaciente } = useParams();
 
   useEffect(() => {
     const userLocal = JSON.parse(window.localStorage.getItem('dataUserlogged'));
-
     if (userLocal) {
       pacienteServices.setToken(userLocal.token);
       pacienteServices
         .getOne(idPaciente)
         .then((response) => {
-          setPaciente(response);
-          setDerechaSup(response['medicalHistory']['Derecha_sup'][0]);
-          setDerechaInf(response['medicalHistory']['Derecha_inf'][0]);
-          setIzquierdaInf(response['medicalHistory']['Izquierda_inf'][0]);
-          setIzquierdaSup(response['medicalHistory']['Izquierda_sup'][0]);
+          if (response.status !== 400) {
+            setPaciente(response);
+            setDerechaSup(response['medicalHistory']['Derecha_sup'][0]);
+            setDerechaInf(response['medicalHistory']['Derecha_inf'][0]);
+            setIzquierdaInf(response['medicalHistory']['Izquierda_inf'][0]);
+            setIzquierdaSup(response['medicalHistory']['Izquierda_sup'][0]);
+            setAlergias(response['medicalHistory']['Alergias']);
+          }
         })
         .catch((error) => console.log(error));
     }
@@ -38,22 +40,45 @@ const InfoPaciente = () => {
       {paciente ? (
         <main className="row">
           <h3 className="mb-4">Historia clinica Odontologica</h3>
-          <div className="col-4">
-            <h5>Informacion del paciente: </h5>
-            <h6>Nombre: {paciente?.nombre}</h6>
-            <h6>Cedula: {paciente?.cedula}</h6>
-            <h6>Edad: {paciente?.edad}</h6>
-            <h6>Telefono: {paciente?.number}</h6>
-            <h6>Odontologo: {paciente?.user?.name}</h6>
+          <div className="col-6 d-flex gap-4">
+            <div
+              className="rounded d-flex flex-column"
+              style={{
+                backgroundColor: '#f5f5f5',
+                padding: '10px',
+                paddingRight: '50px',
+              }}
+            >
+              <h5>Informacion del paciente </h5>
+              <span>Nombre: {paciente?.nombre}</span>
+              <span>Cedula: {paciente?.cedula}</span>
+              <span>Edad: {paciente?.edad}</span>
+              <span>Telefono: {paciente?.number}</span>
+              <span>Odontologo: {paciente?.user?.name}</span>
+            </div>
+
+            <div
+              className="rounded d-flex flex-column"
+              style={{
+                backgroundColor: '#f5f5f5',
+                padding: '10px',
+                paddingRight: '50px',
+              }}
+            >
+              <h5 className="">Alergias</h5>
+              {alergias.map((alergia) => (
+                <span key={alergia._id}> {alergia.Nombre}</span>
+              ))}
+            </div>
           </div>
 
-          <div className="col-8 position-relative">
+          <div className="col-6 position-relative">
             <img
               src={dientes.slogan}
               style={{
                 width: '300px',
                 height: '300px',
-                marginLeft: '450px',
+                marginLeft: '250px',
                 marginTop: '-80px',
               }}
               alt=""
